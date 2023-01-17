@@ -165,7 +165,7 @@ const App = () => {
           path="/"
           element={<AnecdoteList anecdotes={anecdotes} />}
         ></Route>
-        <Route path="/create" element={<CreateNew />}></Route>
+        <Route path="/create" element={<CreateNew addNew={addNew} />}></Route>
         <Route path="/about" element={<About />}></Route>
       </Routes>
       {/* <CreateNew addNew={addNew} />
