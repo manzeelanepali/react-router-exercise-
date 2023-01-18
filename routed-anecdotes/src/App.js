@@ -1,6 +1,6 @@
-import { Children, useState } from "react";
+import { useState } from "react";
 
-import { Routes, Route, Link, useParams } from "react-router-dom";
+import { Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
 
 const Menu = () => {
   const padding = {
@@ -16,6 +16,7 @@ const Menu = () => {
       <Link style={padding} to="/create">
         create{" "}
       </Link>
+      {}
 
       <Link style={padding} to="/about">
         about
@@ -95,6 +96,8 @@ const Footer = () => (
 );
 
 const CreateNew = (props) => {
+  const navigate = useNavigate();
+
   const [content, setContent] = useState("");
   const [author, setAuthor] = useState("");
   const [info, setInfo] = useState("");
@@ -107,6 +110,10 @@ const CreateNew = (props) => {
       info,
       votes: 0,
     });
+    setContent("");
+    setAuthor("");
+    setInfo("");
+    navigate("/");
   };
 
   return (
