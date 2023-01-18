@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { Children, useState } from "react";
 
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useParams } from "react-router-dom";
 
 const Menu = () => {
   const padding = {
@@ -24,19 +24,43 @@ const Menu = () => {
   );
 };
 
-const AnecdoteList = ({ anecdotes }) => (
-  <div>
-    <h2>Anecdotes</h2>
-    <ul>
-      {anecdotes.map((anecdote) => (
-        <li key={anecdote.id}>
-          <Link to={`/anecdotes/ ${anecdote.id}`}>{anecdote.content}</Link>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+const AnecdoteDetail = ({ anecdotes }) => {
+  const id = useParams().id;
 
+  const ourAnecdote = anecdotes.find((anecdote) => {
+    return anecdote.id === Number(id);
+  });
+
+  return (
+    <div>
+      <h1>{ourAnecdote.content}</h1>
+      <p> has {ourAnecdote.votes} votes</p>
+    </div>
+  );
+};
+
+const AnecdoteList = ({ anecdotes }) => {
+  const id = useParams().id;
+
+  // console.log("this is id", id);
+  const anecdote = anecdotes.find((n) => {
+    // console.log(n.id, Number(id));
+    return n.id === id;
+  });
+  // console.log("anecdote", anecdote);
+  return (
+    <div>
+      <h2>Anecdotes</h2>
+      <ul>
+        {anecdotes.map((anecdote) => (
+          <li key={anecdote.id}>
+            <Link to={`/anecdotes/${anecdote.id}`}>{anecdote.content}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 const About = () => (
   <div>
     <h2>About anecdote app</h2>
@@ -164,9 +188,10 @@ const App = () => {
 
       <Routes>
         <Route
-          path=",anecdotes.id"
-          element={<AnecdoteList anecdotes={anecdotes} />}
-        />
+          path="/anecdotes/:id"
+          element={<AnecdoteDetail anecdotes={anecdotes} />}
+        ></Route>
+
         <Route
           path="/"
           element={<AnecdoteList anecdotes={anecdotes} />}
