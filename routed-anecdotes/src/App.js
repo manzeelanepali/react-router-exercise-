@@ -110,9 +110,9 @@ const CreateNew = (props) => {
       info,
       votes: 0,
     });
-    setContent("");
-    setAuthor("");
-    setInfo("");
+    // setContent("");
+    // setAuthor("");
+    // setInfo("");
     navigate("/");
   };
 
