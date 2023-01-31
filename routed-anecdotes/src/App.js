@@ -59,7 +59,7 @@ const AnecdoteList = ({ anecdotes }) => {
     // console.log(n.id, Number(id));
     return n.id === id;
   });
-  console.log("anecdote", anecdote);
+  // console.log("anecdote", anecdote);
   return (
     <div>
       <h2>Anecdotes</h2>
