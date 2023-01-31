@@ -34,6 +34,7 @@ const Menu = () => {
 };
 
 const AnecdoteDetail = ({ anecdote }) => {
+  console.log(anecdote, "she");
   return (
     <div>
       <h1>{anecdote.content}</h1>
@@ -58,7 +59,7 @@ const AnecdoteList = ({ anecdotes }) => {
     // console.log(n.id, Number(id));
     return n.id === id;
   });
-  // console.log("anecdote", anecdote);
+  console.log("anecdote", anecdote);
   return (
     <div>
       <h2>Anecdotes</h2>
@@ -116,14 +117,22 @@ const CreateNew = (props) => {
     e.preventDefault();
     props.addNew({
       content: content.value,
+
       author: author.value,
       info: info.value,
       votes: 0,
     });
+    console.log("content checking", content);
     // setContent("");
     // setAuthor("");
     // setInfo("");
     navigate("/");
+  };
+
+  const resetField = () => {
+    content.resetField();
+    author.resetField();
+    info.resetField();
   };
 
   return (
@@ -150,8 +159,10 @@ const CreateNew = (props) => {
           url for more info
           <input name="info" value={info.value} onChange={info.onChange} />
         </div>
-        <button>create</button>
+        <button type="submit">create</button>
+        {/* <button onClick={() => resetField()}>reset</button> */}
       </form>
+      <button onClick={() => resetField()}>reset</button>
     </div>
   );
 };
